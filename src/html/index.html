@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+    <script src="js/ng-file-model.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </head>
+  <body ng-controller="mainCtl">
+    
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Music library</a>
+        </div>
+
+        <p class="navbar-text hidden-xs">FrontEnd developer Test</p>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <div class="content">
+        <div class="content-head clearfix">
+          <span class="count-albums">All albums: <b>{{count.value}}</b></span>
+          
+          <div class="btn-wrap float-right">
+            <button type="button" class="btn btn-success" ng-click="modalOptions('Create')" data-toggle="modal" data-target="#createModal">Create album</button>
+          </div>
+        </div>
+        <div class="clearfix">
+         
+          <div ng-repeat="album in albumsPre" class="col-xx col-xs-6 col-md-4 col-lg-3">
+            <div class="album-wrap">
+              <div class="thumbnail">
+                <img ng-src="{{album.logoUrl || 'img/img.png'}}" alt="">
+              </div>
+              <div class="desc">
+                <p><b>title:</b> {{album.title}}</p>
+                <p><b>artist:</b> {{album.artist}}</p>
+                <p><b>country:</b> {{album.country}}</p>
+                <p><b>company:</b> {{album.company}}</p>
+                <p><b>price:</b> {{album.price}}</p>
+                <p><b>year:</b> {{album.year}}</p>
+              </div>
+              <div class="btn-wrap">
+                <button type="button" class="btn btn-warning" ng-click="modalOptions('Edit', album)" data-toggle="modal" data-target="#createModal">Edit album</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteAlbum(album.id, $event)">Delete album</button>
+              </div>
+            </div>
+          </div> 
+        </div>
+        
+        <div class="text-center">
+          <ul class="pagination">
+            <li ng-class="{ 'active': currPage == '0' }"><span ng-click="paginFirst()" class="cursor">1</span></li>
+            <li ng-show="firstDots"><span>...</span></li>
+            <li ng-repeat="pag in pagination.paginList" ng-class="{ 'active': currPage == pag-1 }"><span ng-click="paginReset(pag)" class="cursor">{{pag}}</span></li>
+            <li ng-hide="lastDots"><span>...</span></li>
+            <li ng-class="{ 'active': currPage == pagination.paginMax }"><span ng-click="paginLast()" class="cursor">{{pagination.paginMax}}</span></li>
+          </ul>
+        </div>
+        
+        
+      </div>
+    </div>
+    
+    <footer>
+      <div class="container text-center">
+        <p>Footer &copy;2017</p>
+      </div>
+    </footer>
+    
+    <div id="createModal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{modalTitle}} album</h4>
+          </div>
+          <div class="modal-body album-form">
+            <div class="item">
+              <span>Album logo</span>
+              <input type="file" ng-file-model="obj.testFile">
+            </div>
+            <div class="item">
+              <span>Title</span>
+              <input type="text" ng-model="modalData.title">
+            </div>
+            <div class="item">
+              <span>Artist</span>
+              <input type="text" ng-model="modalData.artist">
+            </div>
+            <div class="item">
+              <span>Country</span>
+              <input type="text" ng-model="modalData.country">
+            </div>
+            <div class="item">
+              <span>Company</span>
+              <input type="text" ng-model="modalData.company">
+            </div>
+            <div class="item">
+              <span>Price</span>
+              <input type="text" ng-model="modalData.price">
+            </div>
+            <div class="item">
+              <span>Year</span>
+              <input type="text" ng-model="modalData.year">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="saveAlbum(modalTitle, modalData, obj.testFile)" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,90 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content {
+  min-height: 800px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+  margin: 0 0 15px;
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+}
+
+.content-head {
+  padding: 15px;
+}
+
+.count-albums {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 18px;
+  line-height: 34px;
+}
+
+.album-wrap {
+  position: relative;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+
+  .thumbnail {
+    display: block;
+    position: relative;
+    color: #000;
+    height: 190px;
+    margin-bottom: 5px;
+    
+    img {
+      max-height: 180px;
+    }
+  }
+
+  .desc {
+    background-color: rgba(255,255,255,.8);
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .btn-wrap {
+    padding: 15px 0 0;
+    text-align: center;
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.album-form {
+  .item {
+    margin: 5px 0;
+    
+    input {
+      width: 100%;
+      border-radius: 5px;
+      outline: none !important;
+      border: 1px solid #999;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .content-head .btn-wrap {
+    float: none;
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .col-xx {
+    width: 100%;
+  }
+}
